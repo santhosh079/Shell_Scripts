@@ -2,20 +2,24 @@ name: Test Project
 on: push
 jobs:
     test:
-        # Fixed the typo "unbuntu" to "ubuntu"
         runs-on: ubuntu-latest
         steps:
           - name: get code
-            # Upgraded from v3 to v4
-            uses: actions/checkout@v4
+            # Upgraded to v6 to support the Node 24 runner requirements
+            uses: actions/checkout@v6
+
           - name: Install NodeJS
-            # Upgraded from v3 to v4
-            uses: actions/setup-node@v4
+            # Upgraded to v6 to support the Node 24 runner requirements
+            uses: actions/setup-node@v6
             with:
               node-version: '18'
-              # Added caching for faster npm installs
+              # This will automatically look for and cache your package-lock.json
               cache: 'npm'
+
           - name: Install dependencies
+            # Note: Ensure package-lock.json is committed to your repo for npm ci to work.
+            # If you absolutely cannot use a lockfile, change this to "npm install"
             run: npm ci
+
           - name: Run tests
             run: npm test
