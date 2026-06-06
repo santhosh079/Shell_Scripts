@@ -7,4 +7,4 @@ jobs:
       - name: Print Greeting
         run: echo "Hellow World"
       - name: Print Goodbye
-        run: ehco "Done - Bye"
+        run: echo "Done - Bye"
