@@ -1,23 +1,16 @@
-name: Install Apache on Ubuntu
-
-on:
-  push:
-    branches:
-      - main
-
+name: Test Project
+on: push
 jobs:
-  install-apache:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Update apt and install Apache
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y apache2
-
-      - name: Verify Apache installed
-        run: |
-          apache2 -v
+    test:
+        runs-on: ubuntu-latest
+        steps:
+            - name: get code
+                uses: actions/checkout@v2
+            -name: Install Node.js
+                uses: actions/setup-node@v2
+                with:
+                    node-version: '18'
+            - name: install dependencies
+                run: npm install
+            - name: run tests
+                run: npm test
