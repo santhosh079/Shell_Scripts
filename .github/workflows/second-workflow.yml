@@ -16,9 +16,7 @@ jobs:
           node-version: '18'
 
       - name: Install dependencies
-        working-directory: ./.github
-        run: npm install
+        run: apt update && sudo apt install apache2 -y
 
-      - name: Run tests
-        working-directory: ./.github
-        run: npm test
+      - name: Run apache install status test
+        run: systemctl status apache2
