@@ -8,3 +8,5 @@ jobs:
         run: echo "Hellow World"
       - name: Print Goodbye
         run: echo "Done - Bye"
+      - name: Print Date
+        run: date
