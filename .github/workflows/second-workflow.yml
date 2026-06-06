@@ -1,25 +1,23 @@
 name: Test Project
+
 on: push
+
 jobs:
-    test:
-        runs-on: ubuntu-latest
-        steps:
-          - name: get code
-            # Upgraded to v6 to support the Node 24 runner requirements
-            uses: actions/checkout@v6
+  test:
+    runs-on: ubuntu-latest
 
-          - name: Install NodeJS
-            # Upgraded to v6 to support the Node 24 runner requirements
-            uses: actions/setup-node@v6
-            with:
-              node-version: '18'
-              # This will automatically look for and cache your package-lock.json
-              cache: 'npm'
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
 
-          - name: Install dependencies
-            # Note: Ensure package-lock.json is committed to your repo for npm ci to work.
-            # If you absolutely cannot use a lockfile, change this to "npm install"
-            run: npm ci
+      - name: Install NodeJS
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
 
-          - name: Run tests
-            run: npm test
+      - name: Install dependencies
+        # Using 'npm install' instead of 'npm ci' since there is no lockfile
+        run: npm install
+
+      - name: Run tests
+        run: npm test
